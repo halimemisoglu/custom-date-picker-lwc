@@ -14,7 +14,7 @@ A feature-rich Lightning Web Component (LWC) for Salesforce that provides a cust
 
 ## Screenshots
 
-*Add screenshots of your component here*
+<img width="284" height="403" alt="Ekran görüntüsü 2025-09-08 110232" src="https://github.com/user-attachments/assets/0d7c0a4c-7307-44be-9206-e027eef6b9a7" />
 
 ## Installation
 
