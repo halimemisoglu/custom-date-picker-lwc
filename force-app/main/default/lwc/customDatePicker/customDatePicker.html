@@ -1,0 +1,72 @@
+<!-- customDatePicker.html -->
+<template>
+    <div class="date-picker-container">
+        <!-- Input alanı -->
+        <div class="date-input-wrapper" onclick={toggleCalendar}>
+            <input type="text" class="date-input slds-input" value={displayValue} placeholder="Tarih seçiniz..."
+                readonly />
+            <lightning-icon icon-name="utility:event" size="small" class="calendar-icon">
+            </lightning-icon>
+        </div>
+
+        <!-- Takvim -->
+        <template if:true={isCalendarOpen}>
+            <div class="calendar-container slds-dropdown">
+                <div style="text-align:right">
+                    <lightning-button-icon variant="border-filled" icon-name="utility:close" alternative-text="Close"
+                        onclick={closeCalendar} size="large"></lightning-button-icon>
+                </div>
+                <!-- Takvim başlığı -->
+                <div class="calendar-header">
+                    <button class="nav-button slds-button slds-button_icon" onclick={previousMonth}>
+                        <lightning-icon icon-name="utility:chevronleft" size="x-small"></lightning-icon>
+                    </button>
+                    <div class="month-year-display">{currentMonthYear}</div>
+                    <button class="nav-button slds-button slds-button_icon" onclick={nextMonth}>
+                        <lightning-icon icon-name="utility:chevronright" size="x-small"></lightning-icon>
+                    </button>
+                </div>
+
+                <!-- Gün isimleri -->
+                <div class="day-names-row">
+                    <template for:each={dayNames} for:item="dayName">
+                        <div key={dayName} class="day-name">{dayName}</div>
+                    </template>
+                </div>
+
+                <!-- Takvim günleri -->
+                <div class="calendar-grid">
+                    <template for:each={calendarDays} for:item="day">
+                        <button key={day.fullDate} class={day.className} data-date={day.fullDate} onclick={selectDate}
+                            style={day.style} disabled={day.isPastDate}>
+                            {day.date}
+                        </button>
+                    </template>
+                </div>
+                <template if:true={tooltipVisible}>
+                    <div class="tooltip" style="top: {tooltipPosition.y}px; left: {tooltipPosition.x}px;">
+                        {tooltipContent}
+                    </div>
+                </template>
+                <div class="color-legend">
+                    <div class="legend-item">
+                        <span class="legend-color sufficient-capacity"></span>
+                        <span class="legend-text">Yeterli Kota</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color insufficient-capacity"></span>
+                        <span class="legend-text">Yetersiz Kota</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color weekend-color"></span>
+                        <span class="legend-text">Hafta Sonu</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color holiday-color"></span>
+                        <span class="legend-text">Resmi Tatil</span>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>
